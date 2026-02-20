@@ -16,6 +16,50 @@ Through coordinated disclosure and professional collaboration with IT stakeholde
 
 ---
 
+## 🔬 Research Methodology
+The assessment followed a structured "Proactive Threat Hunting" approach:
+
+- Automated Reconnaissance: Deployed custom tooling to map the attack surface and discover hidden endpoints within the Spring Boot API architecture.
+
+- Traffic Analysis: Analyzed the discrepancy between the authenticated administrative UI and the unauthenticated backend API routes.
+
+- Vulnerability Exploitation: Confirmed an Insecure Direct Object Reference (IDOR) vulnerability on the /api/v1/complaints collection, allowing bulk data extraction via HTTP GET.
+
+- Coordinated Disclosure: Provided a technical Root Cause Analysis (RCA) to the IT stakeholders, identifying the lack of method-level security.
+
+- Post-Remediation Verification: Conducted regression testing to ensure the patch successfully restricted access without disrupting public submission functionality.
+
+## 🛠️ Custom Tooling:
+A core component of this research was the development and deployment of Bubble-Bash v37.0, a proprietary shell-based security scanner designed for high-speed reconnaissance and vulnerability discovery.
+
+Key Technical Features:
+- Bubble-Dive Engine: A recursive fuzzing engine that identifies active endpoints and immediately triggers sub-scanners upon receiving 200 OK status codes.
+
+- Source Code Scavenging: Uses regex patterns to scan HTML and JavaScript for leaked secrets, including API keys, tokens, and hardcoded credentials.
+
+- RCE Vector Identification: Proactively hunts for file upload forms and input fields to identify potential Remote Code Execution (RCE) entry points.
+
+- SQLi Probing: Automates basic error-based SQL injection testing on all discovered parameters.
+
+- Automated Looting: Generates structured, timestamped reports and isolated files for sensitive data found during the "dive."
+
+### Technical Logic Snippet:
+
+```
+bubble_dive() {
+    head -n 1000 "$WORDLIST" | while read -r path; do
+        url="${base_url%/}/${path}"
+        res=$(curl -s -o /dev/null -w "%{http_code}" "$url")
+
+        if [ "$res" == "200" ]; then
+            # Trigger deep-scan subroutines
+            scan_source_code "$url"
+            check_upload_vuln "$url"
+        fi
+    done
+}
+```
+
 ## 🔍 Technical Vulnerability Analysis
 
 ### 1. Root Cause Analysis (RCA)
@@ -69,4 +113,4 @@ Verification was completed on Feb 19, 2026. All attack vectors previously used t
 > **Data Integrity:** Secured  
 > **PII Exposure:** Eliminated
 
-Disclaimer: This research was conducted for educational and security improvement purposes only. All testing was performed responsibly following coordinated disclosure protocols.
+Disclaimer: This research was conducted for educational and security-hardening purposes. All activities complied with responsible disclosure standards.
