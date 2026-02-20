@@ -30,7 +30,7 @@ The assessment followed a structured "Proactive Threat Hunting" approach:
 - Post-Remediation Verification: Conducted regression testing to ensure the patch successfully restricted access without disrupting public submission functionality.
 
 ## 🛠️ Custom Tooling:
-A core component of this research was the development and deployment of Bubble-Bash v37.0, a proprietary shell-based security scanner designed for high-speed reconnaissance and vulnerability discovery.
+A core component of this research was the development and deployment of [Bubble-Scanner](https://github.com/MoriartyPuth/bubble-scanner), a proprietary shell-based security scanner designed for high-speed reconnaissance and vulnerability discovery.
 
 Key Technical Features:
 - Bubble-Dive Engine: A recursive fuzzing engine that identifies active endpoints and immediately triggers sub-scanners upon receiving 200 OK status codes.
