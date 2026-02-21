@@ -1,7 +1,10 @@
 # 🛡️ Case Study: API Broken Access Control & PII Remediation
-**Target System:** Government Complaint Support System (CSS)  
+**Target System:** [Government Complaint Support System (CSS)](https://css-gdin.interior.gov.kh/home)
+
 **Status:** ✅ COMPLETED, FIXED, & VERIFIED  
+
 **Vulnerability:** Insecure Direct Object Reference (IDOR) / Broken Access Control (BAC)  
+
 **Severity:** 🔴 Critical (9.1/10)
 
 ![Security Status](https://img.shields.io/badge/Security-Verified_Patch-success?style=for-the-badge&logo=github)
